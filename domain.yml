@@ -1,0 +1,108 @@
+version: "3.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_good
+  - mood_unhappy
+  - bot_challenge
+  - show_time
+  - show_features
+  - ask_wellbeing
+  - ask_what_bot_doing_now
+  - ask_bot_location
+  - ask_rain_situation
+  - meaningless_expressions
+  - get_weather_info
+  - city_name
+  - air_quality
+
+entities:
+  - city
+  - weather_info_type
+
+slots: 
+  city:
+    type: text
+    influence_conversation: true  
+    mappings:
+    - type: from_entity
+      entity: city
+      conditions:
+        - active_loop: city_name_form 
+  weather_info_type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: weather_info_type
+
+forms:
+  city_name_form:
+    required_slots:
+      - city
+
+actions:
+  - action_show_time
+  - action_rain_status
+  - action_weather_data
+  - action_provide_aqi
+
+responses:
+  utter_greet:
+  - text: "হাই, কেমন আছেন?"
+
+  utter_happy:
+  - text: "শুনে ভালো লাগলো।"
+
+  utter_cheer_up:
+  - text: "আশা করি এই ছবিটা দেখে অপনার ভালো লাগবে: https://images.unsplash.com/photo-1587402092301-725e37c70fd8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y3V0ZSUyMGFuaW1hbHxlbnwwfHwwfHw%3D&w=1000&q=80"
+
+  utter_did_that_help:
+  - text: "এটা কি উপকারে আসলো?"
+
+  utter_goodbye:
+  - text: "শুভ বিদায়‌।"
+
+  utter_iamabot:
+  - text: "আমার নাম রাসা‌। আমি একটি বট। কিভাবে আপনাকে সাহায্য করতে পারি?"
+
+  
+  utter_goodbye_casual:
+  - text: "আপনার সাথে কথা বলে ভালো লাগলো, শুভ বিদায়‌।"
+
+  utter_features:
+  - text: "ফিচারসমূহ: এখনো যোগ করা হয়নি"
+
+  utter_wellbeing:
+  - text: "আমি একটি বট, আমি সব সময় ভালো থাকি। জিঞ্জাসা করার জন্য আপনাকে ধন্যবাদ"
+
+  utter_whatbotdoingnow:
+  - text: "বর্তমানে আমি আপনার সাথে কথা বলছি"
+  - text: "সমুদ্র সৈকতগুলো উইকিপিডিয়াতে খুঁজছি। আপনি চাইলে আপনার সাথে শেয়ার করতে পারি"
+  - text: "সিলেটে ছুটি কাটাচ্ছি"
+  - text: "কক্সবাজার সমুদ্র সৈকতে। এখানে খুব জোরে বাতাস হচ্ছে এখন"
+  - text: "এভারেস্ট জয় করতে যাচ্ছি"
+  - text: "ভাবতেছি নরওয়ে যাব"
+  - text: "সুইডেনের শিক্ষা ব্যবস্থা নিয়ে গবেষণা করছি"
+
+  utter_please_rephrase:
+  - text: "আপনার কথাটা সঠিক বুঝতে পারলাম না, আপনি কি একটু ভিন্নভাবে বলবেন?"
+
+  utter_meaninglessexpressions:
+  - text: "হুমম"
+
+  utter_location:
+  - text: "কম্পিউটারের মেমরি আর লজিক বোর্ডের মধ্যে।"
+
+  utter_ask_user_location:
+  - text: "দয়া করে আপনার অবস্থানটি বলুন: ১। রংপুর ২। রাজশাহী ৩। ঢাকা ৪। ময়মনসিংহ ৫। সিলেট ৬। চট্টগ্রাম ৭। বরিশাল ৮। খুলনা"
+
+  utter_ask_city_name_form_city:
+  - text: "দয়া করে আপনার অবস্থানটি বলুন: ১। রংপুর ২। রাজশাহী ৩। ঢাকা ৪। ময়মনসিংহ ৫। সিলেট ৬। চট্টগ্রাম ৭। বরিশাল ৮। খুলনা"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

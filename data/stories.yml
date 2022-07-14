@@ -1,0 +1,83 @@
+version: "3.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_good
+  - action: utter_happy
+  
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: time show path
+  steps:
+  - intent: show_time
+  - action: action_show_time
+
+- story: utter meaningless expression when the user does
+  steps:
+  - intent: meaningless_expressions
+  - action: utter_meaninglessexpressions
+
+- story: casual conversation
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_good
+  - action: utter_happy
+  - intent: ask_what_bot_doing_now
+  - action: utter_whatbotdoingnow
+  - intent: ask_bot_location
+  - action: utter_location
+  - intent: goodbye
+  - action: utter_goodbye_casual
+
+- story: weather info
+  steps:
+  - intent: get_weather_info
+  - action: city_name_form
+  - active_loop: city_name_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_weather_data
+
+- story: rain status
+  steps: 
+  - intent: ask_rain_situation
+  - action: city_name_form
+  - active_loop: city_name_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_rain_status
+
+- story: air quality
+  steps:
+  - intent: air_quality
+  - action: city_name_form
+  - active_loop: city_name_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_provide_aqi

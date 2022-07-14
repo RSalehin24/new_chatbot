@@ -1,0 +1,64 @@
+version: "3.0"
+
+rules:
+
+- rule: Say utter_greet everytime the user greets
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Always say utter_happy after user expresses mood_good
+  steps:
+  - intent: mood_good
+  - action: utter_happy
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Always reply when user asks wellbeing
+  steps:
+  - intent: ask_wellbeing
+  - action: utter_wellbeing
+
+- rule: Always show features when the user ask
+  steps:
+  - intent: show_features
+  - action: utter_features
+
+- rule: Always reply what the bot is doing when asked
+  steps:
+  - intent: ask_what_bot_doing_now
+  - action: utter_whatbotdoingnow
+
+- rule: Always ask a user to rephrase when they send a message with low nlu confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase
+
+- rule: Always give the location when the user asks
+  steps:
+  - intent: ask_bot_location
+  - action: utter_location
+
+- rule: Always give the user time when the user asks
+  steps:
+  - intent: show_time
+  - action: action_show_time
+
+# - rule: Activate form
+#   steps:
+#     - intent: get_weather_info
+#     - action: city_name_form
+#     - active_loop: city_name_form
+
+# - rule: Submit form
+#   condition:
+#     - active_loop: city_name_form
+#   steps:
+#     - action: city_name_form
+#     - active_loop: null
+#     - slot_was_set:
+#       - requested_slot: null
+#     - action: action_weather_data
